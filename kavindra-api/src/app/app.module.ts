@@ -1,11 +1,8 @@
-import {join} from 'path';
-
 import {CacheModule} from '@nestjs/cache-manager';
 import {Module} from '@nestjs/common';
 import {ConfigModule} from '@nestjs/config';
 import {APP_GUARD, RouterModule} from '@nestjs/core';
 import {EventEmitterModule} from '@nestjs/event-emitter';
-import {ServeStaticModule} from '@nestjs/serve-static';
 import {ThrottlerGuard, ThrottlerModule} from '@nestjs/throttler';
 
 import {routes} from './app.routes';
@@ -23,13 +20,6 @@ import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supab
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../../js-widget', 'dist'),
-      exclude: ['/v1*', 'docs'],
-      serveStaticOptions: {
-        extensions: ['js'],
-      },
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
